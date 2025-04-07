@@ -34,7 +34,7 @@ public class DialogManeager : MonoBehaviour
         }
         if (dialogDatabase != null)
         {
-            dialogDatabase Initialize();                 //초기화
+            dialogDatabase.Initialize();                 //초기화
         }
         else
         {
@@ -51,10 +51,18 @@ public class DialogManeager : MonoBehaviour
 
 
     }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //UI초기화 후 대화 시작 (ID 1)
+        CloseDialog();
+        StartDialog(1);                      //자동으로 첫 번쨰 대화 시작
+    }
     //ID 로 대화 시작
     public void StartDialog(int dialogId)
     {
-        DialogSO dialog = dialogDatabase.GetDialogByld(dialogld);
+        DialogSO dialog = dialogDatabase.GetDialogByld(dialogId);
     }
 
     //DiglogSO로 대화 시작
@@ -63,6 +71,8 @@ public class DialogManeager : MonoBehaviour
         if (dialog == null) return;
 
         currentDialog = dialog;
+        ShowDialog();
+        dialogPanel.SetActive(true);
         
     }
 
@@ -71,6 +81,27 @@ public class DialogManeager : MonoBehaviour
         if (currentDialog == null) return ;
         characterNameText.text = currentDialog.characterName;   //캐릭터 이름 설정
         dialogText.text = currentDialog.text;                   //대화 텍스트 설정
+    }
+
+    public void NextDialog()
+    {
+        if(currentDialog != null && currentDialog.nextiId > 0)
+        {
+            DialogSO nextDialog = dialogDatabase.GetDialogByld(currentDialog.nextiId);
+            if (nextDialog != null)
+            {
+                currentDialog = nextDialog;
+                ShowDialog();
+            }
+            else
+            {
+                CloseDialog();
+            }
+        }
+        else
+        {
+            CloseDialog();
+        }
     }
     public void CloseDialog()                                   //대화 종료
     {

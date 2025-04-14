@@ -6,54 +6,53 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ItemDatabase", menuName = "Inventory/Database")]
 public class ItemDatabaseSO : ScriptableObject
 {
-    public List<ItemSO> items = new List<ItemSO>();         //ItemSOë¥¼ ë¦¬ìŠ¤íŠ¸ë¡œ ê´€ë¦¬ í•œë‹¤.
+    public List<ItemSO> items = new List<ItemSO>();         //ItemSO¸¦ ¸®½ºÆ®·Î °ü¸® ÇÑ´Ù. 
 
-    //ìºì‹±ì„ ìœ„í•œ ì‚¬ì „
-    private Dictionary<int, ItemSO> itemsById;              //IDë¡œ ì•„ì´í…œ ì°¾ê¸° ìœ„í•œ ìºì‹±
-    private Dictionary<string, ItemSO> itemsByName;         //ì´ë¦„ìœ¼ë¡œ ì•„ì´í…œ ì°¾ê¸°
+    //Ä³½ÌÀ» À§ÇÑ »çÀü
+    private Dictionary<int, ItemSO> itemsById;              //ID·Î ¾ÆÀÌÅÛ Ã£±â À§ÇÑ Ä³½Ì 
+    private Dictionary<string, ItemSO> itemsByName;         //ÀÌ¸§À¸·Î ¾ÆÀÌÅÛ Ã£±â
 
-    public void Initialize()                                        //ì´ˆê¸° ì„¤ì • í•¨ìˆ˜
+    public void Initialize()                                        //ÃÊ±â ¼³Á¤ ÇÔ¼ö 
     {
-        itemsById = new Dictionary<int, ItemSO>();                  //ìœ„ì— ì„ ì–¸ë§Œ í–ˆê¸° ë•Œë¬¸ì— Dictionary í• ë‹¹
+        itemsById = new Dictionary<int, ItemSO>();                  //À§¿¡ ¼±¾ğ¸¸ Çß±â ¶§¹®¿¡ Dictionary ÇÒ´ç
         itemsByName = new Dictionary<string, ItemSO>();
 
-        foreach (var item in items)                                 //items ë¦¬ìŠ¤íŠ¸ì— ì„ ì–¸ ë˜ì–´ ìˆëŠ”ê²ƒì„ ê°€ì§€ê³  Dictionaryì— ì¸ë ¥í•œë‹¤. 
+        foreach (var item in items)                                 //items ¸®½ºÆ®¿¡ ¼±¾ğ µÇ¾î ÀÖ´Â°ÍÀ» °¡Áö°í Dictionary¿¡ ÀÔ·ÂÇÑ´Ù. 
         {
             itemsById[item.id] = item;
             itemsByName[item.itemName] = item;  
         }
     }
 
-    //IDë¡œ ì•„ì´í…œ ì°¾ê¸°    
+    //ID·Î ¾ÆÀÌÅÛ Ã£±â    
     public ItemSO GetItemById(int id)
     {
-        if(itemsById == null)                               //itemsById ê°€ ìºì‹±ì´ ë˜ì–´ ìˆì§€ ì•Šë‹¤ë©´ ì´ˆê¸°í™” í•œë‹¤.
+        if(itemsById == null)                               //itemsById °¡ Ä³½ÌÀÌ µÇ¾î ÀÖÁö ¾Ê´Ù¸é ÃÊ±âÈ­ ÇÑ´Ù.
         {
             Initialize();
         }
-        if (itemsById.TryGetValue(id, out ItemSO item))     //id ê°’ì„ ì°¾ì•„ì„œ ItemSO ë¥¼ ë¦¬í„´ í•œë‹¤.
+        if (itemsById.TryGetValue(id, out ItemSO item))     //id °ªÀ» Ã£¾Æ¼­ ItemSO ¸¦ ¸®ÅÏ ÇÑ´Ù. 
             return item;
 
-        return null;                                        //ì—†ì„ ê²½ìš° NULL
+        return null;                                        //¾øÀ» °æ¿ì NULL
     }
 
-    //ì´ë¦„ìœ¼ë¡œ ì•„ì´í…œ ì°¾ê¸° 
+    //ÀÌ¸§À¸·Î ¾ÆÀÌÅÛ Ã£±â 
     public ItemSO GetItemByName(string name)
     {
-        if (itemsByName == null)                            //itemsByName ê°€ ìºì‹±ì´ ë˜ì–´ ìˆì§€ ì•Šë‹¤ë©´ ì´ˆê¸°í™” í•œë‹¤.
+        if (itemsByName == null)                            //itemsByName °¡ Ä³½ÌÀÌ µÇ¾î ÀÖÁö ¾Ê´Ù¸é ÃÊ±âÈ­ ÇÑ´Ù.
         {
             Initialize();
         }
-        if (itemsByName.TryGetValue(name, out ItemSO item))  //name ê°’ì„ ì°¾ì•„ì„œ ItemSO ë¥¼ ë¦¬í„´ í•œë‹¤. 
+        if (itemsByName.TryGetValue(name, out ItemSO item))  //name °ªÀ» Ã£¾Æ¼­ ItemSO ¸¦ ¸®ÅÏ ÇÑ´Ù. 
             return item;
 
         return null;
     }
 
-    //íƒ€ì…ìœ¼ë¡œ ì•„ì´í…œ í•„í„°ë§ 
+    //Å¸ÀÔÀ¸·Î ¾ÆÀÌÅÛ ÇÊÅÍ¸µ 
     public List<ItemSO> GetItemByType(ItemType type)
     {
         return items.FindAll(item => item.itemType == type);
     }
 }
-

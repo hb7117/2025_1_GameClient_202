@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ItemSO : ScriptableObject
 {
-    //ê¸°ì¡´ GameDB Excel ì—ì„œ ì„ ì–¸í•œ ë³€ìˆ˜ë¥¼ ë‚˜ì—´ í•œë‹¤.
+    //±âÁ¸ GameDB Excel ¿¡¼­ ¼±¾ğÇÑ º¯¼ö¸¦ ³ª¿­ ÇÑ´Ù. 
     public int id;
     public string itemName;
     public string nameEng;
@@ -16,10 +16,10 @@ public class ItemSO : ScriptableObject
     public int power;
     public int level;
     public bool isStackable;
-    public Sprite icon;                 //ì‹¤ì œ ì‚¬ìš©í•  ìŠ¤í”„ë¼ì´íŠ¸ ì„ ì–¸
+    public Sprite icon;                 //½ÇÁ¦ »ç¿ëÇÒ ½ºÇÁ¶óÀÌÆ® ¼±¾ğ 
     public override string ToString()
     {
-        return $"[{id}] {itemName} ({itemType}) - ï¿½ï¿½ï¿½ï¿½ : {price}ï¿½ï¿½ï¿½, ï¿½Ó¼ï¿½ : {power}";
+        return $"[{id}] {itemName} ({itemType}) - °¡°İ : {price}°ñµå, ¼Ó¼º : {power}";
     }
     public string DisplayName
     {

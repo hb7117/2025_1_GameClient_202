@@ -11,10 +11,10 @@ public class CardDisplay : MonoBehaviour
 
     //3D 카드 요소
     public MeshRenderer cardRenderer;               //카드 렌더러 (icon or 일러스트)
-    public TextMeshPro nameText;                    //이름 텍스트
-    public TextMeshPro costText;                    //비용 텍스트
-    public TextMeshPro attackText;                  //공격력/효과 텍스트
-    public TextMeshPro descriptionText;             //설명 텍스트 
+    public TextMeshProUGUI nameText;                    //이름 텍스트
+    public TextMeshProUGUI costText;                    //비용 텍스트
+    public TextMeshProUGUI attackText;                  //공격력/효과 텍스트
+    public TextMeshProUGUI descriptionText;             //설명 텍스트 
 
     //카드 상태 
     public bool isDragging = false;
@@ -166,7 +166,5 @@ public class CardDisplay : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    
 
 }

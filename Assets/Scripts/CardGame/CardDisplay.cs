@@ -78,6 +78,13 @@ public class CardDisplay : MonoBehaviour
 
     private void OnMouseUp()
     {
+        CaracterStats playerStats = FindAnyObjectByType<CaracterStats>();
+        if(playerStats == null || playerStats.currentMana < cardData.manaCost)              //마나 검사
+        {
+            Debug.Log($"마나가 부족합니다! (필요 : {cardData.manaCost}, 현재 : {playerStats?.currentMana ?? 0})");
+            transform.position = originalPosition;
+            return;
+        }
         isDragging = false;
 
         //레이캐스트로 타겟 감지
@@ -111,7 +118,7 @@ public class CardDisplay : MonoBehaviour
         else if (Physics.Raycast(ray, out hit, Mathf.Infinity, playerLayer))
         {
             //플레이어에게 힐 효과 적용
-            CaracterStats playerStats = hit.collider.GetComponent<CaracterStats>();
+            //CaracterStats playerStats = hit.collider.GetComponent<CaracterStats>();
 
             if (playerStats != null)
             {
@@ -155,6 +162,10 @@ public class CardDisplay : MonoBehaviour
             //카드를 사용했다면 버린 카드 더미로 이동
             if (cardManager != null)
                 cardManager.DiscardCard(cardIndex);
+
+            //카드 사용 시 마나 소모(카드가 성공적으로 사용된 후 추가)
+            playerStats.UseMana(cardData.manaCost);
+            Debug.Log($"마나를 {cardData.manaCost} 사용했습니다. (남은 마나 : {playerStats.currentMana})");
         }
 
         //카드를 사용하지 않았다면 원래 위치로 되돌리기

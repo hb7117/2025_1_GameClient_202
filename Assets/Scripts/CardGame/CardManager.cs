@@ -91,7 +91,7 @@ public class CardManager : MonoBehaviour
         }
 
         // 손패 위치 업데이트
-        ArrangeHand();
+        //ArrangeHand();
 
         Debug.Log("카드를 드로우 했습니다. : " + cardData.cardName + " (손패 : " + handCards.Count + "/6");
     }

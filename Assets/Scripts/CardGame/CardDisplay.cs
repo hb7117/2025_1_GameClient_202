@@ -78,7 +78,7 @@ public class CardDisplay : MonoBehaviour
 
     private void OnMouseUp()
     {
-        CaracterStats playerStats = FindAnyObjectByType<CaracterStats>();
+        CharacterStats playerStats = FindAnyObjectByType<CharacterStats>();
         if(playerStats == null || playerStats.currentMana < cardData.manaCost)              //마나 검사
         {
             Debug.Log($"마나가 부족합니다! (필요 : {cardData.manaCost}, 현재 : {playerStats?.currentMana ?? 0})");
@@ -98,7 +98,7 @@ public class CardDisplay : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, enemyLayer))
         {
             //적에게 공격 효과 적용
-            CaracterStats enemyStats = hit.collider.GetComponent<CaracterStats>();
+            CharacterStats enemyStats = hit.collider.GetComponent<CharacterStats>();
 
             if (enemyStats != null)
             {

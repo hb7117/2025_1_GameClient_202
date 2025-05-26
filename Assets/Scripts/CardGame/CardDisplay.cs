@@ -147,7 +147,8 @@ public class CardDisplay : MonoBehaviour
         {
             transform.position = originalPosition;
             //손패 재정렬 (필요한 경우)
-            cardManager.ArrangeHand();
+            if (cardManager != null)
+                cardManager.ArrangeHand();
         }
         else
         {
